@@ -12,6 +12,7 @@ namespace SDCI
 {
     public partial class Form5 : Form
     {
+
         public Form5()
         {
             InitializeComponent();
@@ -19,6 +20,8 @@ namespace SDCI
 
         private void button1_Click(object sender, EventArgs e)  //  start new mission
         {
+            this.Close();
+
             // 1. show form 1
             // 2. hide this form
         }
@@ -47,6 +50,25 @@ namespace SDCI
                 Variables.confirmClose = true;
                 System.Windows.Forms.Application.Exit();
             }
+        }
+
+        private void Form5_Shown(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i <= 50; i++)//output report
+            {
+                listBox1.Items.Add("[Time Stamp:" + Variables.me + "]"); //display time
+                listBox1.Items.Add("            Route History"+Variables.me +": [ " + "LONG:" + Variables.me + " LAT:" + Variables.me + "]");//location
+                listBox1.Items.Add("");
+
+            }
+           
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
         }
     }
 }

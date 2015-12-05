@@ -12,6 +12,8 @@ namespace SDCI
 {
     public partial class Form3 : Form
     {
+
+
         public Form3()
         {
             InitializeComponent();
@@ -22,10 +24,47 @@ namespace SDCI
             // 1. send data to serial port (upload mission info)
             // 2. show form 4
             // 3. hide this form
+            Form4 f4 = new Form4();
+            f4.Show();
+            this.Hide();
         }
 
-        private void Form3_Load(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)  //  edit button
         {
+            // 1. show form 2 to edit trip info
+            // 2. hide this form
+        }
+
+
+        private void Form3_Shown(object sender, EventArgs e)
+        {
+            listBox1.Items.Add("[SYSTEM INFO:]");
+            if (true)   //check what the user chooses
+            {
+                listBox1.Items.Add("            Calibration Selected: [MANUAL]");   //show Auto Calib Result or Manual
+                listBox1.Items.Add("");
+                listBox1.Items.Add("            Calibrated Input: [ " + " LONG:" + Variables.me + " LAT:" + Variables.me + "]");
+            }
+            else
+            {
+                listBox1.Items.Add("            Calibration Selected: [AUTOMATIC]");   //show Auto Calib Result or Manual
+            }
+            listBox1.Items.Add("");
+
+            listBox1.Items.Add("            Speed Input: [ " + Variables.me + " MPH]"); //speed output
+            listBox1.Items.Add("");
+
+            listBox1.Items.Add("[WAYPOINT INFO:]");
+            listBox1.Items.Add("            Total Waypoints: [ " + Variables.me + " Points]");
+            for (int i = 0; i <= 50; i++)//output waypoints
+            {
+                listBox1.Items.Add("            Point" + i + " :[ " + "LONG:" + Variables.me + " LAT:" + Variables.me + "]");
+                listBox1.Items.Add("");
+            }
+            //final note
+            listBox1.Items.Add("[END OF VERIFICATION.]");
+            listBox1.Items.Add("[PRESS EDIT TO CHANGE YOUR CURRENT MISSION INFO]");
+            listBox1.Items.Add("[PRESS START TO START MISSION]");
 
         }
 
@@ -45,20 +84,19 @@ namespace SDCI
             if (!Variables.confirmClose)
             {
                 MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
-                Variables.confirmClose = true; 
+
+                Variables.confirmClose = true;
+
                 System.Windows.Forms.Application.Exit();
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)  //  edit button
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // 1. show form 2 to edit trip info
-            // 2. hide this form
-        }
 
-        private void Form3_Shown(object sender, EventArgs e)
-        {
-            listBox1.Items.Add(Variables.me);
+
         }
     }
+
+       
 }
