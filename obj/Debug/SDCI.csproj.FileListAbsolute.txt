@@ -24,3 +24,16 @@ C:\Users\MSW5257\Desktop\SDCI\SDCI\obj\Debug\SDCI.Form4.resources
 C:\Users\MSW5257\Desktop\SDCI\SDCI\obj\Debug\SDCI.Form5.resources
 C:\Users\MSW5257\Desktop\SDCI\SDCI\obj\Debug\SDCI.Properties.Resources.resources
 C:\Users\MSW5257\Desktop\SDCI\SDCI\obj\Debug\SDCI.csproj.GenerateResource.Cache
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\bin\Debug\SDCI.exe.config
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.exe
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.pdb
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\bin\Debug\SDCI.exe
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\bin\Debug\SDCI.pdb
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.csprojResolveAssemblyReference.cache
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.Form1.resources
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.Form2.resources
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.Form3.resources
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.Form4.resources
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.Form5.resources
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.Properties.Resources.resources
+X:\Downloads\Snow-Drone-Control-Interface-master\Snow-Drone-Control-Interface-master\obj\Debug\SDCI.csproj.GenerateResource.Cache

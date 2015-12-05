@@ -12,6 +12,8 @@ namespace SDCI
 {
     public partial class Form1 : Form
     {
+        Form2 f2;
+
         public Form1()
         {
             InitializeComponent();
@@ -37,11 +39,23 @@ namespace SDCI
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)   // if close (red x) is pressed
         {
-            if (MessageBox.Show("This will close down the whole application. Confirm?", "Close Application", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (!Variables.confirmClose)
             {
-                e.Cancel = true;
+                if (MessageBox.Show("This will close down the whole application, which may interrupt a trip in progress. Confirm?", "Close Application", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
             }
-            System.Windows.Forms.Application.Exit();
+        }
+
+        private void Form1_FormClosed(Object sender, FormClosedEventArgs e)
+        {
+            if (!Variables.confirmClose)
+            {
+                MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
+                Variables.confirmClose = true; 
+                System.Windows.Forms.Application.Exit();
+            }
         }
 
 
