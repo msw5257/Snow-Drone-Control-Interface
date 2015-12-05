@@ -146,6 +146,7 @@ namespace SDCI
             int temp_index = index;
 
             for (int i = 0; i < temp_index; i++)
+            {
                 try
                 {
                     // Remove the item in the List.
@@ -155,6 +156,7 @@ namespace SDCI
                 catch
                 {
                 }
+            }
 
             listBox1.DataSource = null;
             listBox1.DataSource = items;
