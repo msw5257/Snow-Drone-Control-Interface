@@ -21,6 +21,7 @@ namespace SDCI
         private void button1_Click(object sender, EventArgs e)  //  start new mission
         {
             this.Close();
+
             // 1. show form 1
             // 2. hide this form
         }
@@ -66,6 +67,7 @@ namespace SDCI
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
 
         }
     }

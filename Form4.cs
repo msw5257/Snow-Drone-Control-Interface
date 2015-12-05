@@ -47,6 +47,7 @@ namespace SDCI
             Form5 f5 = new Form5();
             f5.Show();
             this.Close();
+
         }
 
         private void Form4_Shown(object sender, EventArgs e)

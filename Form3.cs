@@ -28,6 +28,7 @@ namespace SDCI
             f4.Show();
             this.Hide();
         }
+
         private void button2_Click(object sender, EventArgs e)  //  edit button
         {
             // 1. show form 2 to edit trip info
@@ -83,13 +84,16 @@ namespace SDCI
             if (!Variables.confirmClose)
             {
                 MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
+
                 Variables.confirmClose = true;
+
                 System.Windows.Forms.Application.Exit();
             }
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+
 
         }
     }
