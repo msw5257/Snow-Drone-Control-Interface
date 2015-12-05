@@ -19,7 +19,8 @@ namespace SDCI
 
         private void button1_Click(object sender, EventArgs e)  //  start new mission
         {
-
+            // 1. show form 1
+            // 2. hide this form
         }
 
         private void Form5_Load(object sender, EventArgs e)
@@ -29,11 +30,23 @@ namespace SDCI
 
         private void Form5_FormClosing(object sender, FormClosingEventArgs e)   // if close (red x) is pressed
         {
-            if (MessageBox.Show("This will close down the whole application. Confirm?", "Close Application", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (!Variables.confirmClose)
             {
-                e.Cancel = true;
+                if (MessageBox.Show("This will close down the whole application, which may interrupt a trip in progress. Confirm?", "Close Application", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
             }
-            System.Windows.Forms.Application.Exit();
+        }
+
+        private void Form5_FormClosed(Object sender, FormClosedEventArgs e)
+        {
+            if (!Variables.confirmClose)
+            {
+                MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
+                Variables.confirmClose = true;
+                System.Windows.Forms.Application.Exit();
+            }
         }
     }
 }

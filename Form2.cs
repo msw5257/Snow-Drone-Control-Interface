@@ -24,16 +24,28 @@ namespace SDCI
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)   // if close (red x) is pressed
         {
-            if (MessageBox.Show("This will close down the whole application. Confirm?", "Close Application", MessageBoxButtons.YesNo) != DialogResult.Yes)
+            if (!Variables.confirmClose)
             {
-                e.Cancel = true;
-            } 
-            System.Windows.Forms.Application.Exit();
+                if (MessageBox.Show("This will close down the whole application, which may interrupt a trip in progress. Confirm?", "Close Application", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void Form2_FormClosed(Object sender, FormClosedEventArgs e)
+        {
+            if (!Variables.confirmClose)
+            {
+                MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
+                Variables.confirmClose = true; 
+                System.Windows.Forms.Application.Exit();
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Application.Exit();
+  
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -41,6 +53,11 @@ namespace SDCI
             Form3 f3 = new Form3();
             f3.Show();
             this.Hide();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
