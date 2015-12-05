@@ -10,5 +10,6 @@ namespace SDCI
     {
         public static bool confirmClose = false;
         public static double me = 1;
+        public static double[] tripData;
     }
 }
