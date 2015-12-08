@@ -74,7 +74,7 @@ namespace SDCI
             if (!Variables.confirmClose)
             {
                 MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
-                Variables.confirmClose = true; 
+                Variables.confirmClose = true;              // this ensures we don't check before closing each individual form
                 System.Windows.Forms.Application.Exit();
             }
         }
@@ -85,6 +85,7 @@ namespace SDCI
 
             Variables.ComPort.PortName = comboBox1.Text;        // set the COM port name for upload
 
+            // if Form 3 isn't already opened, open it. Otherwise, show the open Form 3
             if (Variables.RefToForm3 == null)
             {
                 Form3 f3 = new Form3();
@@ -249,7 +250,7 @@ namespace SDCI
             }
             else
             {
-                if ((n <= 20) && (n >= 0))
+                if ((n <= 20) && (n > 0))
                 {
                     label6.Text = "";
                     validSpeed = true;
