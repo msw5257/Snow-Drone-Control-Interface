@@ -19,13 +19,13 @@ namespace SDCI
 
         private void button1_Click(object sender, EventArgs e)  //  start new mission
         {
-            // 1. show form 1
-            // 2. hide this form
+            Variables.RefToForm1.Show();     // open Form 1 again
+            this.Hide();                     // hide this form
         }
 
         private void Form5_Load(object sender, EventArgs e)
         {
-
+            Variables.RefToForm5 = this;                    // point the reference to form 5 to this form
         }
 
         private void Form5_FormClosing(object sender, FormClosingEventArgs e)   // if close (red x) is pressed
@@ -47,6 +47,25 @@ namespace SDCI
                 Variables.confirmClose = true;
                 System.Windows.Forms.Application.Exit();
             }
+        }
+
+        private void Form5_Shown(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i <= 50; i++)//output report
+            {
+                listBox1.Items.Add("[Time Stamp:" + Variables.me + "]"); //display time
+                listBox1.Items.Add("            Route History"+Variables.me +": [ " + "LONG:" + Variables.me + " LAT:" + Variables.me + "]");//location
+                listBox1.Items.Add("");
+
+            }
+           
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
         }
     }
 }

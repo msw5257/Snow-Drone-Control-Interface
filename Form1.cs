@@ -12,8 +12,6 @@ namespace SDCI
 {
     public partial class Form1 : Form
     {
-        Form2 f2;
-
         public Form1()
         {
             InitializeComponent();
@@ -21,15 +19,22 @@ namespace SDCI
 
         private void button1_Click(object sender, EventArgs e)  // launch button
         {
-            // show form2, hide form1
-            Form2 f2 = new Form2();
-            f2.Show();
+            if (Variables.RefToForm2 == null)
+            {
+                Form2 f2 = new Form2();
+                f2.Show();
+            }
+            else
+            {
+                Variables.RefToForm2.Show();
+            }
+
             this.Hide();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Variables.RefToForm1 = this;
         }
 
         private void button2_Click(object sender, EventArgs e)  // close button
