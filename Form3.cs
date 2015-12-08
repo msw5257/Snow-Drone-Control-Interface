@@ -35,7 +35,7 @@ namespace SDCI
         }
 
 
-        private void Form3_Shown(object sender, EventArgs e)
+        private void Form3_Load(object sender, EventArgs e)
         {
             Variables.RefToForm3 = this;                // point the reference to form 3 to this form
         }
