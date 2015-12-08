@@ -12,8 +12,6 @@ namespace SDCI
 {
     public partial class Form3 : Form
     {
-        public Form RefToForm2 { get; set; }
-
         public Form3()
         {
             InitializeComponent();
@@ -36,7 +34,8 @@ namespace SDCI
             this.Hide();
         }
 
-        private void Form3_Load(object sender, EventArgs e)
+
+        private void Form3_Shown(object sender, EventArgs e)
         {
             Variables.RefToForm3 = this;                // point the reference to form 3 to this form
         }
