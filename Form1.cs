@@ -39,6 +39,7 @@ namespace SDCI
 
         private void button2_Click(object sender, EventArgs e)  // close button
         {
+            Variables.confirmClose = true;
             System.Windows.Forms.Application.Exit();
         }
 
