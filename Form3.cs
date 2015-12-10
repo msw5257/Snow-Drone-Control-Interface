@@ -31,52 +31,51 @@ namespace SDCI
                 Variables.RefToForm4.Show();
             }
 
-            this.Hide();
+            this.Hide();           // hide this form
         }
 
 
-        private void Form3_Shown(object sender, EventArgs e)
+        private void Form3_Load(object sender, EventArgs e)
         {
             Variables.RefToForm3 = this;                // point the reference to form 3 to this form
+
+            listBox1.Items.Add("[SYSTEM INFO:]");
+
+            float[] temp_basecamp = Variables.basecampCoordinates.ToArray();
+            if (!Variables.autoCalibration)   //check what the user chooses
+            {
+                listBox1.Items.Add("            Calibration Selected: [MANUAL]\n");   //show Auto Calib Result or Manual
+                listBox1.Items.Add("            Calibrated Input: [ " + " LAT:" + temp_basecamp[0] + " LONG:" + temp_basecamp[1] + "]\n");
+            }
+            else
+            {
+                listBox1.Items.Add("            Calibration Selected: [AUTOMATIC]\n");   //show Auto Calib Result or Manual
+                listBox1.Items.Add("            Calibrated Input: [ " + " LAT:" + temp_basecamp[0] + " LONG:" + temp_basecamp[1] + "]\n");
+            }
+
+
+            listBox1.Items.Add("            Speed Input: [ " + Variables.speed + " MPH]\n");     //speed output
+
+            listBox1.Items.Add("[WAYPOINT INFO:]");
+            listBox1.Items.Add("            Total Waypoints: [ " + (Variables.waypoints.Count() / 2) + " Points]");
+
+            float[] temp_waypoints = Variables.waypoints.ToArray();
+
+            for (int i = 0; i < (Variables.waypoints.Count() / 2); i++)      //output waypoints
+            {
+                listBox1.Items.Add("            Point" + (i + 1) + " :[ " + "LAT:" + temp_waypoints[2 * i] + " LONG:" + temp_waypoints[(2 * i) + 1] + "]\n");
+            }
+
+            //final note
+            listBox1.Items.Add("[END OF VERIFICATION.]");
+            listBox1.Items.Add("[PRESS EDIT TO CHANGE YOUR CURRENT MISSION INFO]");
+            listBox1.Items.Add("[PRESS START TO START MISSION]");
         }
 
         private void button2_Click(object sender, EventArgs e)  //  edit button
         {
             Variables.RefToForm2.Show();         // show Form 2 again (using a reference to it) to edit trip
             this.Hide();                    // hide this form
-        }
-
-
-        private void Form3_Shown(object sender, EventArgs e)
-        {
-            listBox1.Items.Add("[SYSTEM INFO:]");
-            if (true)   //check what the user chooses
-            {
-                listBox1.Items.Add("            Calibration Selected: [MANUAL]");   //show Auto Calib Result or Manual
-                listBox1.Items.Add("");
-                listBox1.Items.Add("            Calibrated Input: [ " + " LONG:" + Variables.me + " LAT:" + Variables.me + "]");
-            }
-            else
-            {
-                listBox1.Items.Add("            Calibration Selected: [AUTOMATIC]");   //show Auto Calib Result or Manual
-            }
-            listBox1.Items.Add("");
-
-            listBox1.Items.Add("            Speed Input: [ " + Variables.me + " MPH]"); //speed output
-            listBox1.Items.Add("");
-
-            listBox1.Items.Add("[WAYPOINT INFO:]");
-            listBox1.Items.Add("            Total Waypoints: [ " + Variables.me + " Points]");
-            for (int i = 0; i <= 50; i++)//output waypoints
-            {
-                listBox1.Items.Add("            Point" + i + " :[ " + "LONG:" + Variables.me + " LAT:" + Variables.me + "]");
-                listBox1.Items.Add("");
-            }
-            //final note
-            listBox1.Items.Add("[END OF VERIFICATION.]");
-            listBox1.Items.Add("[PRESS EDIT TO CHANGE YOUR CURRENT MISSION INFO]");
-            listBox1.Items.Add("[PRESS START TO START MISSION]");
-
         }
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)   // if close (red x) is pressed
@@ -102,10 +101,40 @@ namespace SDCI
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            listBox1.Items.Clear();                     // clear before printing refresh
+            listBox1.Items.Add("[SYSTEM INFO:]");
+
+            float[] temp_basecamp = Variables.basecampCoordinates.ToArray();
+            if (!Variables.autoCalibration)   //check what the user chooses
+            {
+                listBox1.Items.Add("            Calibration Selected: [MANUAL]\n");   //show Auto Calib Result or Manual
+                listBox1.Items.Add("            Calibrated Input: [ " + " LAT:" + temp_basecamp[0] + " LONG:" + temp_basecamp[1] + "]\n");
+            }
+            else
+            {
+                listBox1.Items.Add("            Calibration Selected: [AUTOMATIC]\n");   //show Auto Calib Result or Manual
+                listBox1.Items.Add("            Calibrated Input: [ " + " LAT:" + temp_basecamp[0] + " LONG:" + temp_basecamp[1] + "]\n");
+            }
 
 
+            listBox1.Items.Add("            Speed Input: [ " + Variables.speed + " MPH]\n");     //speed output
+
+            listBox1.Items.Add("[WAYPOINT INFO:]");
+            listBox1.Items.Add("            Total Waypoints: [ " + (Variables.waypoints.Count() / 2) + " Points]");
+
+            float[] temp_waypoints = Variables.waypoints.ToArray();
+
+            for (int i = 0; i < (Variables.waypoints.Count() / 2); i++)      //output waypoints
+            {
+                listBox1.Items.Add("            Point" + (i + 1) + " :[ " + "LAT:" + temp_waypoints[2 * i] + " LONG:" + temp_waypoints[(2 * i) + 1] + "]\n");
+            }
+
+            //final note
+            listBox1.Items.Add("[END OF VERIFICATION.]");
+            listBox1.Items.Add("[PRESS EDIT TO CHANGE YOUR CURRENT MISSION INFO]");
+            listBox1.Items.Add("[PRESS START TO START MISSION]");
         }
     }
 
