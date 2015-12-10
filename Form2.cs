@@ -88,7 +88,6 @@ namespace SDCI
             Variables.basecampCoordinates.Add(float.Parse(textBox4.Text));      // add latitude coordinate
             Variables.basecampCoordinates.Add(float.Parse(textBox5.Text));      // add longitude coordinate
 
-
             // if Form 3 isn't already opened, open it. Otherwise, show the open Form 3
             if (Variables.RefToForm3 == null)
             {
