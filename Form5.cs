@@ -55,8 +55,8 @@ namespace SDCI
 
             for (int i = 0; i <= 50; i++)//output report
             {
-                listBox1.Items.Add("[Time Stamp:" + Variables.me + "]"); //display time
-                listBox1.Items.Add("            Route History"+Variables.me +": [ " + "LONG:" + Variables.me + " LAT:" + Variables.me + "]");//location
+                listBox1.Items.Add("[Time Stamp:" + "insert time stamp" + "]");                   //display time
+                listBox1.Items.Add("            Route History"+ "1" +": [ " + "LAT:" + "insert latitude" + " LONG:" + "insert longitude" + "]"); //location
                 listBox1.Items.Add("");
 
             }

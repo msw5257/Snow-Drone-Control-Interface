@@ -17,7 +17,6 @@ namespace SDCI
         int index = 0;                          // number of waypoints
         bool validSpeed = true;                 // app starts with a valid default speed
         bool validWaypointLog = false;          // are there any waypoints entered? if not, no upload allowed
-        //bool serialPortSelected = false;        // did user select serial port? if not, no upload allowed
         bool calibrationSelected = false;       // did user select calibration? if not, no upload allwoed
 
         public Form2()
@@ -74,7 +73,7 @@ namespace SDCI
             if (!Variables.confirmClose)
             {
                 MessageBox.Show("The application has been closed successfully.", "Application Closed!", MessageBoxButtons.OK);
-                Variables.confirmClose = true; 
+                Variables.confirmClose = true;              // this ensures we don't check before closing each individual form
                 System.Windows.Forms.Application.Exit();
             }
         }
@@ -84,7 +83,13 @@ namespace SDCI
             // add speed, calibration bytes, and waypoints to array (Variables.tripData) to be uploaded
 
             Variables.ComPort.PortName = comboBox1.Text;        // set the COM port name for upload
+            Variables.speed = float.Parse(textBox3.Text);       // convert speed text to float and set the global speed variable
+            Variables.basecampCoordinates.Clear();              // clear in case editting old data
+            Variables.basecampCoordinates.Add(float.Parse(textBox4.Text));      // add latitude coordinate
+            Variables.basecampCoordinates.Add(float.Parse(textBox5.Text));      // add longitude coordinate
 
+
+            // if Form 3 isn't already opened, open it. Otherwise, show the open Form 3
             if (Variables.RefToForm3 == null)
             {
                 Form3 f3 = new Form3();
@@ -96,59 +101,6 @@ namespace SDCI
             }
 
             this.Hide();
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            double n;
-
-            if (!double.TryParse(textBox2.Text, out n)) // check if input isn't a number
-            {
-                label4.Text = "must be a number";
-                button1.Enabled = false;
-            }
-            else
-            {
-                if ((n <= 180) && (n >= 0))
-                {
-                    double z;
-
-                    label4.Text = "Longitude";
-
-                    if (double.TryParse(textBox1.Text, out z) && (z >= -90) && (z <= -65))
-                    {
-                        button1.Enabled = true;
-                    }
-                }
-                else
-                {
-                    label4.Text = "must be between\n0 and 180";
-                    button1.Enabled = false;
-                }
-            }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            index++;
-            items.Add(index.ToString() + "\t" + textBox1.Text + "\t" + textBox2.Text + "\n");
-
-            listBox1.DataSource = null;
-            listBox1.DataSource = items;
-
-            textBox1.Text = "Latitude";
-            textBox2.Text = "Longitude";
-
-            validWaypointLog = true;            // at least one valid waypoint now
-
-            if (validSpeed && validWaypointLog && calibrationSelected)
-            {
-                button4.Enabled = true;
-            }
-            else
-            {
-                button4.Enabled = false;
-            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)   // latitude waypoint input
@@ -181,12 +133,69 @@ namespace SDCI
             }
         }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)   // longitude waypoint input
+        {
+            double n;
+
+            if (!double.TryParse(textBox2.Text, out n)) // check if input isn't a number
+            {
+                label4.Text = "must be a number";
+                button1.Enabled = false;
+            }
+            else
+            {
+                if ((n <= 180) && (n >= 0))
+                {
+                    double z;
+
+                    label4.Text = "Longitude";
+
+                    if (double.TryParse(textBox1.Text, out z) && (z >= -90) && (z <= -65))
+                    {
+                        button1.Enabled = true;
+                    }
+                }
+                else
+                {
+                    label4.Text = "must be between\n0 and 180";
+                    button1.Enabled = false;
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)  // add waypoint button
+        {
+            index++;
+            items.Add(index.ToString().PadRight(10) + textBox1.Text.PadRight(6) + "\t" + textBox2.Text + "\n");
+            
+            Variables.waypoints.Add(float.Parse(textBox1.Text));     // add latitude to waypoint list
+            Variables.waypoints.Add(float.Parse(textBox2.Text));     // add longitude to waypoint list
+
+            listBox1.DataSource = null;
+            listBox1.DataSource = items;
+
+            textBox1.Text = "Latitude";
+            textBox2.Text = "Longitude";
+
+            validWaypointLog = true;            // at least one valid waypoint now
+
+            if (validSpeed && validWaypointLog && calibrationSelected)
+            {
+                button4.Enabled = true;
+            }
+            else
+            {
+                button4.Enabled = false;
+            }
+        }
+
         private void button2_Click(object sender, EventArgs e)  // The Remove button was clicked
         {
             try
             {
-                // Remove the item in the List.
-                items.RemoveAt(index - 1);
+                items.RemoveAt(index - 1);      // remove the item from the waypoint log
+                Variables.waypoints.RemoveAt(2*index - 1);    // remove the longitude waypoint from the waypoint list
+                Variables.waypoints.RemoveAt(2*index - 2);    // remove the latitude waypoint from the waypoint list
                 index--;
             }
             catch
@@ -222,8 +231,9 @@ namespace SDCI
                 try
                 {
                     // Remove the item in the List.
-                    items.RemoveAt(index - 1);
+                    items.RemoveAt(index - 1);  // remove the item from the waypoint log
                     index--;
+                    Variables.waypoints.Clear();    // clear the list of waypoint for data transfer
                 }
                 catch
                 {
@@ -249,7 +259,7 @@ namespace SDCI
             }
             else
             {
-                if ((n <= 20) && (n >= 0))
+                if ((n <= 20) && (n > 0))
                 {
                     label6.Text = "";
                     validSpeed = true;
@@ -281,6 +291,7 @@ namespace SDCI
                 textBox4.Enabled = false;
                 textBox5.Enabled = false;
                 calibrationSelected = true;
+                Variables.autoCalibration = true;           // set global variable to true
             }           // else manual calibration - allow user to enter basecamp coordinates
             else
             {
@@ -288,6 +299,7 @@ namespace SDCI
                 textBox5.Text = "Longitude";
                 textBox4.Enabled = true;
                 textBox5.Enabled = true;
+                Variables.autoCalibration = false;          // set global variable to false
 
                 double n;
 
