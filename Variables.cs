@@ -13,7 +13,7 @@ namespace SDCI
         // Global variables (accessible by all forms)
 
         public static bool confirmClose = false;       // ensures user only asked once if they are sure they want to close the app
-        public static double me = 1;
+        public static double me = 1;                    // this was a variable for testing, can be removed
         public static SerialPort ComPort = new SerialPort();        // serial port object for data communication
         public static List <float> waypoints = new List<float>();   // holds the waypoint coordinates for data transfer
         public static bool autoCalibration = false;
